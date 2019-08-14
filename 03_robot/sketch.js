@@ -1,24 +1,58 @@
+var x = 0;
+var forward = true;
+let step = 3;
+
 function setup() {
   // put setup code here
-  createCanvas(800,600);
-  noLoop(); // Note that draw() is called in a loop
+  createCanvas(720,480);
+  strokeWeight(2);
+  ellipseMode(RADIUS);
+  frameRate(30);
 }
 
 function draw() {
   // put drawing code here
   background(204);
-  point(400, 300);
-  line(200, 300, 100, 400);
-  triangle(0, 0, 100, 0, 0, 100);
-  triangle(700, 0, 800, 0, 800, 100);
-  triangle(800, 500, 800, 600, 700, 600);
-  triangle(0, 600, 0, 500, 100, 600);
-  quad(100, 300, 400, 250, 500, 100, 600, 200);
-  ellipse(400, 400, 20, 20);
-  rect(400, 400, 100, 100);
-  arc(700, 300, 40, 80, 0, PI+HALF_PI);
-  strokeWeight(10);
-  arc(500, 0, 400, 200, 0, radians(60));
-  fill(153);
-  ellipse(200, 200, 40, 40);
+   // Neck
+  stroke(102); // Set stroke to gray
+  line(266+x, 257, 266+x, 162); // Left
+  line(276+x, 257, 276+x, 162); // Middle
+  line(286+x, 257, 286+x, 162); // Right
+  // Antennae
+  line(276+x, 155, 246+x, 112); // Small
+  line(276+x, 155, 306+x, 56); // Tall
+  line(276+x, 155, 342+x, 170); // Medium
+  // Body
+  noStroke(); // Disable stroke
+  fill(102); // Set fill to gray
+  ellipse(264+x, 377, 33, 33); // Antigravity orb
+  fill(0); // Set fill to black
+  rect(219+x, 257, 90, 120); // Main body
+  fill(102); // Set fill to gray
+  rect(219+x, 274, 90, 6); // Gray stripe
+  // Head
+  fill(0); // Set fill to black
+  ellipse(276+x, 155, 45, 45); // Head
+  fill(x+100, x-150, x+100); // Set fill to white
+  ellipse(288+x, 150, 14, 14); // Large eye
+  fill(0); // Set fill to black
+  ellipse(288+x, 150, 3, 3); // Pupil
+  fill(153); // Set fill to light gray
+  ellipse(263+x, 148, 5, 5); // Small eye 1
+  ellipse(296+x, 130, 4, 4); // Small eye 2
+  ellipse(305+x, 162, 3, 3); // Small eye 3
+
+  if (forward) {
+    x = x + step;
+  } else {
+    x = x - step;
+  }
+
+  if (x > 350) {
+    forward = false;
+  }
+
+  if (x < -20) {
+    forward = true;
+  }
 }
